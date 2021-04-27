@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <title>Currency converter</title>
+  </head>
+  <body>
+    <h1>Currency converter</h1>
+    <section>
+      <div class="container converter">
+        <div class="row d-flex justify-content-center">
+          <div
+            class="col-lg-3 col-md-6 padding-label d-flex justify-content-center padding-top"
+          >
+            <label id="insert-value" for="quantity">Value</label>
+            <input
+              type="number"
+              id="quantity"
+              min="0"
+              oninput="this.value = Math.abs(this.value)"
+              [(ngModel)]="quantityValue"
+              (input)="changeInput()"
+            />
+          </div>
+          <div
+            class="col-lg-3 col-md-6 d-flex justify-content-center padding-top"
+          >
+            <select
+              name="currencies"
+              id="conversionType"
+              [(ngModel)]="conversionType"
+              (ngModelChange)="changeSelect()"
+            >
+              <option value="eur">EUR</option>
+              <option value="usd">USD</option>
+              <option value="czk">CZK</option>
+            </select>
+          </div>
+          <div
+            class="col-lg-2 col-md-5 d-flex justify-content-center padding-top"
+          >
+            <span class="value-in-usd">20 USD</span>
+          </div>
+          <div
+            class="col-lg-3 col-md-6 d-flex justify-content-center padding-top"
+          >
+            <button [disabled]="disabled" (click)="clickButton()">Add</button>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-3 d-flex justify-content-center">
+            <label class="czk-rate currency-rate"></label>
+          </div>
+          <div class="col-md-3 d-flex justify-content-center">
+            <label class="eur-rate currency-rate"></label>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container table-area">
+        <div class="row">
+          <div class="col-md-12 d-flex justify-content-center">
+            <div class="table-container">
+              <table id="table">
+                <thead class="table-head">
+                  <tr>
+                    <th class="left-th">Value</th>
+                    <th class="right-th">Converted Value</th>
+                  </tr>
+                </thead>
+                <tbody class="table-body"></tbody>
+                <tr *ngFor="let item of tableRows">
+                  <td>{{ item.firstValue }}</td>
+                  <td>{{ item.secondValue }}</td>
+                </tr>
+                <tr class="sum">
+                  <td>SUM</td>
+                  <td class="sum-value">{{ sum }} USD</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
